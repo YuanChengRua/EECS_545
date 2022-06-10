@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Input</title>
+
+</head>
+<body>
+        <h2>
+            Welcome to {{ res_name }}
+        </h2>
+
+        <img
+            src= {{ image_url }}
+            width=300 />
+
+
+	  <form action="/handle_form_menu" method="POST">
+          {% for i in range(dish_name_list|length) %}
+              <input type="checkbox" name="{{ dish_name_list[i] }}" value="{{dish_name_list[i]}}">
+                <label>{{dish_name_list[i]}}</label> <br/>
+          {% endfor %}
+		<input type="submit" value="Submit Form"/>
+      </form>
+</body>
+</html>

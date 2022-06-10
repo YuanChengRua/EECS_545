@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Restaurant distance Info</title>
+</head>
+<body>
+    <table>
+    {% for ele in res_info %}
+    <TR>
+        <td>{{ ele[0] }}   {{ ele[1] }}</td>
+    </TR>
+    {% endfor %}
+    </table>
+    <meta http-equiv="refresh" content="7; url='/process_data'" />
+
+</body>
+</html>

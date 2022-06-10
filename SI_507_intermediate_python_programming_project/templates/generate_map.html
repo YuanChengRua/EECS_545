@@ -1,0 +1,63 @@
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#    <meta charset="utf8"/>#}
+{#    <title>HTML Form Response</title>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>We are redirecting you to process the data... </h1>#}
+    <meta http-equiv="refresh" content="7; url='/process_data'" />
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How to add multiple markers on google maps javascript</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVllA-JyoB6yYuLevEg1IY_n0tNy7CBYk"></script>
+    <script type="text/javascript">
+        {#var locations = [#}
+        {#    ['Lucky Kitchen', 42.2983, -83.7212, 1],#}
+        {#    ['Every Green', 42.3037, -83.7059, 2],#}
+        {#];#}
+{#          var locations = '{{ user_location }}'#}
+{#            alert(locations)#}
+        var locations = {{ total_list|safe }};
+        function InitMap() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: new google.maps.LatLng('{{ user_lat }}', '{{ user_lon }}'),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+        }
+    </script>
+</head>
+<body onload="InitMap();">
+    <h1>Show multiple locations on Google Maps using JavaScript</h1>
+{#    <script>#}
+{#    document.write(typeof (locations));#}
+{#    </script>#}
+    <div id="map" style="height: 500px; width: auto;">
+    </div>
+    <meta http-equiv="refresh" content="7; url='/process_data'" />
+</body>
+</html>
